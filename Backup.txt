@@ -1,0 +1,66 @@
+C23
+
+
+cmake_minimum_required(VERSION 4.3)
+
+get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+string(REPLACE " " "_" ProjectId ${ProjectId})
+project(${ProjectId} C)
+
+set(CMAKE_C_STANDARD 23)
+
+file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
+foreach(file ${files})
+    get_filename_component(name ${file} NAME)
+    add_executable(${name} ${file})
+endforeach()
+
+
+--------------------------------------------------------------------------------
+
+C++26
+
+cmake_minimum_required(VERSION 4.3)
+get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+string(REPLACE " " "_" ProjectId ${ProjectId})
+project(${ProjectId} CXX)
+
+set(CMAKE_CXX_STANDARD 26)
+
+file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+foreach(file ${files})
+    get_filename_component(name ${file} NAME)
+    add_executable(${name} ${file})
+endforeach()
+
+--------------------------------------------------------------------------------
+
+Git 提交规范（初学：仅用 main）
+
+格式：类型: 描述
+
+类型：
+  feat      新功能
+  fix       修复问题
+  refactor  代码重构
+  docs      文档修改
+  chore     其他修改（构建/配置/忽略规则等）
+
+正面示例：
+  feat: 新增 test260820 指针练习
+  fix: 修复 main.c 数组越界
+  refactor: 拆分输入与计算逻辑
+  docs: 更新 README 说明
+  chore: 添加根目录 gitignore
+
+反面示例：
+  修改了一下
+  update
+  Init
+  修好了顺便改了文档          （应拆成 fix + docs）
+  feat: 做了一些改动          （描述无信息量）
+
+要求：
+  一次提交只做一类事
+  描述写结果，不写废话
+  文档/脚本/配置不要混进功能提交
